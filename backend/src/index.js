@@ -25,7 +25,7 @@ app.use("/users", userRoutes);
 // mongo connect
 
 const local_db = "mongodb://localhost:27017/vc_project";
-const db_url = "mongodb+srv://sufi:sufi_vc@clusterforvc.povbh.mongodb.net/?retryWrites=true&w=majority&appName=ClusterForVC";
+
 
 main()
     .then(
