@@ -18,14 +18,19 @@ const login = async (req,res) => {
     try{
         const user = await User.findOne({username});
         if (!user){
-            return res.status(httpStatus.NOT_FOUND).json({message : "No user exist with the username" + username});
+            return res.status(httpStatus.NOT_FOUND).json({message : "No user exist with the username " + username});
         }
 
-        if (bcrypt.compare(password, user.password)){
+        let ispasscorrect = await bcrypt.compare(password, user.password);
+
+        if (ispasscorrect){
             let token = crypto.randomBytes(20).toString("hex");
             user.token = token;
             await user.save();
             return res.status(httpStatus.OK).json({token : token})
+        }
+        else{
+            return res.status(httpStatus.UNAUTHORIZED).json({message : "Invalid username or password"});
         }
     }
     catch (e) {
