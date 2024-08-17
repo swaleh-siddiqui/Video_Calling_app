@@ -1,0 +1,12 @@
+body{
+    background-color: white !important;
+}
+
+.video-component{
+    padding: 3rem;
+}
+
+.askusername-container{
+    padding: 5rem;
+    background-color: white;
+}

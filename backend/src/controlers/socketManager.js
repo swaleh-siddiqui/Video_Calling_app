@@ -18,6 +18,8 @@ const connectToSocket = (server) => {
 
     io.on("connection", (socket) => {
 
+        console.log("something connected");
+
         socket.on("join_call", (path) => {
             if (connections[path] === undefined){
                 connections[path] = [];
