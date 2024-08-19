@@ -1,8 +1,11 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import mobile from "/images/mobile.png"
 
 function Landing() {
+
+  const router = useNavigate();
+
   return (
     <div className='landing-container'>
       <div className="nav">
@@ -10,9 +13,9 @@ function Landing() {
           <h2>VC FOR YOU</h2>
         </div>
         <div className="right-nav">
-          <p>Join as Guest</p>
-          <p>Register</p>
-          <div role='button' className="login">
+          <p onClick={() => {router("/guest")}}>Join as Guest</p>
+          <p onClick={() => {router("/auth")}}>Register</p>
+          <div onClick={() => {router("/auth")}} role='button' className="login">
             <p>Log In</p>
           </div>
         </div>

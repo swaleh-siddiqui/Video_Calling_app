@@ -88,3 +88,42 @@
 .main-content .main-right img{
     height: 25rem;
 }
+
+
+/* home component */
+
+.navBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+    text-align: center;
+  
+  }
+  .meetContainer {
+    display: flex;
+    padding-inline: 20px;
+    height: 80vh;
+    gap: 2vw;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  
+  
+  .leftPanel {
+    display: flex;
+    align-items: center;
+  
+  }
+  
+  .rightPanel {
+    display: flex;
+    align-items: center;
+  }
+  
+  .rightPanel > img {
+    width: auto;
+    height: 50vh;
+  }

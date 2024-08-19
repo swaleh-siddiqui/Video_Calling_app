@@ -1,4 +1,5 @@
 import {User} from "../models/userModel.js";
+import { Meet } from "../models/meetModel.js";
 import httpStatus from "http-status";
 import bcrypt, {hash} from "bcrypt";
 import crypto from "crypto";
@@ -70,4 +71,35 @@ const signup = async (req, res) => {
 
 }
 
-export { login, signup , test};
+const getUserHistory = async (req, res) => {
+    const { token } = req.query;
+
+    try {
+        const user = await User.findOne({ token: token });
+        const meetings = await Meet.find({ user_id: user.username })
+        res.json(meetings)
+    } catch (e) {
+        res.json({ message: `Something went wrong ${e}` })
+    }
+}
+
+const addToHistory = async (req, res) => {
+    const { token, meeting_code } = req.body;
+
+    try {
+        const user = await User.findOne({ token: token });
+
+        const newMeeting = new Meet({
+            user_id: user.username,
+            meet_code: meeting_code
+        })
+
+        await newMeeting.save();
+
+        res.status(httpStatus.CREATED).json({ message: "Added code to history" })
+    } catch (e) {
+        res.json({ message: `Something went wrong ${e}` })
+    }
+}
+
+export { login, signup , getUserHistory, addToHistory, test};
