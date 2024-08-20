@@ -2,6 +2,8 @@ import express from "express";
 import {createServer} from "node:http";
 import mongoose from "mongoose";
 
+import "dotenv/config"
+
 import {Server} from "socket.io";
 import cors from "cors";
 
@@ -25,7 +27,7 @@ app.use("/users", userRoutes);
 // mongo connect
 
 const local_db = "mongodb://localhost:27017/vc_project";
-
+const db_url = process.env.DB_URL;
 
 main()
     .then(
@@ -34,7 +36,7 @@ main()
     .catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect(local_db);
+    await mongoose.connect(db_url);
 }
 
 app.get("/", async (req,res) => {
