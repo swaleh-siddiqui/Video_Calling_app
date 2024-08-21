@@ -401,12 +401,15 @@ export default function VideoMeetComponent() {
         setScreen(!screen);
     }
 
+    const router2 = useNavigate();
+
     let handleEndCall = () => {
         try {
             let tracks = localVideoref.current.srcObject.getTracks()
             tracks.forEach(track => track.stop())
         } catch (e) { }
-        window.location.href = "/home"
+        // window.location.href = "/home"
+        router2("/home");
     }
 
     let openChat = () => {
