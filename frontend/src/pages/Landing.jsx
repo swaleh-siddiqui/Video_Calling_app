@@ -60,7 +60,7 @@ function Landing() {
           <ul>
             <li>
               <i className="fa-solid fa-lock-open"></i>
-              <Link to={"/guest"}>Register</Link>
+              <Link to={"/guest"}>Join as Guest</Link>
             </li>
             <li>
               <i className="fa-solid fa-right-to-bracket"></i>
