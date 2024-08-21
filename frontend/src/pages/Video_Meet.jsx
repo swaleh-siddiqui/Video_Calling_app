@@ -466,7 +466,7 @@ export default function VideoMeetComponent() {
                         <h1>Join Call</h1>
                         <TextField id="outlined-basic" label="Username" value={username} onChange={e => setUsername(e.target.value)} variant="outlined" />
                         <Button sx={{backgroundColor : "purple"}} variant="contained" onClick={connect}>Connect</Button>
-                        <div onClick={() => {router("/")}} role='button' className={styles.lobbyHomeBtn}>
+                        <div onClick={() => {router("/home")}} role='button' className={styles.lobbyHomeBtn}>
                             <p>Home</p>
                         </div>
                     </div>
