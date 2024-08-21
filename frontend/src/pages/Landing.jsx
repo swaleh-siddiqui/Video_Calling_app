@@ -10,7 +10,7 @@ function Landing() {
     <div className='landing-container'>
       <div className="nav">
         <div className="left-nav">
-          <h2>VC FOR YOU</h2>
+          <h2>Video Meet</h2>
         </div>
         <div className="right-nav">
           <p onClick={() => {router("/guest")}}>Join as Guest</p>
@@ -31,6 +31,48 @@ function Landing() {
         <div className="main-right">
           <img src={mobile} alt="" />
         </div>
+      </div>
+
+      
+      <div className='main_box'>
+      <input type="checkbox" id="check" style={{color: "white"}}/>
+      
+      <div className="btn_one">
+          <label htmlFor="check">
+            <i className="fa-solid fa-bars"></i>
+          </label>
+      </div>
+
+      <div className="sidebar_menu">
+        <div className="logo">
+          <Link to={"/"}>Video Meet</Link>
+        </div>
+
+        <div className="btn_two">
+          <label htmlFor="check" >
+            <i className="fa-solid fa-xmark"></i>
+          </label>
+        </div>
+
+        
+
+        <div className="menu">
+          <ul>
+            <li>
+              <i className="fa-solid fa-lock-open"></i>
+              <Link to={"/guest"}>Register</Link>
+            </li>
+            <li>
+              <i className="fa-solid fa-right-to-bracket"></i>
+              <Link to={"/auth"}>Register</Link>
+            </li>
+            <li>
+            <i className="fa fa-lock"></i>
+            <Link to={"/auth"}>Log In</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
       </div>
     </div>
   )
