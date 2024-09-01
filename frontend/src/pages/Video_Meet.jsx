@@ -13,6 +13,9 @@ import StopScreenShareIcon from '@mui/icons-material/StopScreenShare'
 import ChatIcon from '@mui/icons-material/Chat'
 import server from '../environment';
 import { useNavigate } from 'react-router';
+import Draggable from "react-draggable";
+
+import SendIcon from '@mui/icons-material/Send';
 
 const server_url = server;
 
@@ -479,12 +482,23 @@ export default function VideoMeetComponent() {
 
                 <div className={styles.meetVideoContainer}>
 
+                    
+                    
+                    <Draggable>
+                    <div className={styles.userVideoDiv}>
+                        <video className={styles.meetUserVideo} ref={localVideoref} autoPlay muted></video>
+                    </div>
+                    </Draggable>
+
+                    <div className={styles.conferenceView}>
+
+
                     {showModal ? 
                     
                     <div className={styles.chatRoom}>
 
                         <div className={styles.chatContainer}>
-                            <h1>Chat</h1>
+                            <h1 className={styles.chatHeading}>Chat</h1>
 
                             <div className={styles.chattingDisplay}>
 
@@ -492,9 +506,9 @@ export default function VideoMeetComponent() {
 
                                     console.log(messages)
                                     return (
-                                        <div style={{ marginBottom: "20px" }} key={index}>
-                                            <p style={{ fontWeight: "bold" }}>{item.sender}</p>
-                                            <p>{item.data}</p>
+                                        <div className={styles.chatMsgBox} key={index}>
+                                            <p className={styles.chatMsgName}>{item.sender}</p>
+                                            <p className={styles.chatMsg}>{item.data}</p>
                                         </div>
                                     )
                                 }) : <p>No Messages Yet</p>}
@@ -503,8 +517,8 @@ export default function VideoMeetComponent() {
                             </div>
 
                             <div className={styles.chattingArea}>
-                                <TextField value={message} onChange={(e) => setMessage(e.target.value)} id="outlined-basic" label="Enter Your chat" variant="outlined" />
-                                <Button variant='contained' onClick={sendMessage}>Send</Button>
+                                <TextField className={styles.chattingAreaText} value={message} onChange={(e) => setMessage(e.target.value)} id="outlined-basic" label="Enter Your chat" variant="outlined" />
+                                <Button className={styles.chattingAreaBtn} variant='contained' onClick={sendMessage}><SendIcon/></Button>
                             </div>
 
 
@@ -512,35 +526,8 @@ export default function VideoMeetComponent() {
                     </div> : <></> }
 
 
-                    <div className={styles.buttonContainers}>
-                        <IconButton onClick={handleVideo} style={{ color: "white" }}>
-                            {(video === true) ? <VideocamIcon /> : <VideocamOffIcon />}
-                        </IconButton>
-                        <IconButton onClick={handleEndCall} style={{ color: "red" }}>
-                            <CallEndIcon  />
-                        </IconButton>
-                        <IconButton onClick={handleAudio} style={{ color: "white" }}>
-                            {audio === true ? <MicIcon /> : <MicOffIcon />}
-                        </IconButton>
-
-                        {screenAvailable === true ?
-                            <IconButton onClick={handleScreen} style={{ color: "white" }}>
-                                {screen === true ? <ScreenShareIcon /> : <StopScreenShareIcon />}
-                            </IconButton> : <></>}
-
-                        <Badge badgeContent={newMessages} max={999} color='orange'>
-                            <IconButton onClick={() => setModal(!showModal)} style={{ color: "white" }}>
-                                <ChatIcon />                        </IconButton>
-                        </Badge>
-
-                    </div>
-
-
-                    <video className={styles.meetUserVideo} ref={localVideoref} autoPlay muted></video>
-
-                    <div className={styles.conferenceView}>
                         {videos.map((video) => (
-                            <div key={video.socketId}>
+                            <div className={styles.otherVideoDiv} key={video.socketId}>
                                 <video
 
                                     data-socket={video.socketId}
@@ -558,10 +545,48 @@ export default function VideoMeetComponent() {
 
                     </div>
 
+                    <div className={styles.buttonContainers}>
+
+                        <div className={styles.otherBtns}>
+                            <div className={styles.otherBtnsDiv}>
+                                <IconButton onClick={handleVideo} style={{ color: "white" }}>
+                                    {(video === true) ? <VideocamIcon /> : <VideocamOffIcon />}
+                                </IconButton>
+                            </div>
+                            <div className={styles.otherBtnsDiv}>
+                                <IconButton onClick={handleAudio} style={{ color: "white" }}>
+                                    {audio === true ? <MicIcon /> : <MicOffIcon />}
+                                </IconButton>
+                            </div>
+                            {screenAvailable === true ?
+                            <div className={styles.otherBtnsDiv}>
+                                <IconButton onClick={handleScreen} style={{ color: "white" }}>
+                                    {screen === true ? <ScreenShareIcon /> : <StopScreenShareIcon />}
+                                </IconButton>
+                            </div> : <></>}
+
+                            <div className={styles.otherBtnsDiv}>
+                                <Badge badgeContent={newMessages} max={999} color='orange'>
+                                    <IconButton onClick={() => setModal(!showModal)} style={{ color: "white" }}>
+                                        <ChatIcon />                        </IconButton>
+                                </Badge>
+                            </div>
+
+                            <div className={styles.endCallBtnDiv}>
+                                <IconButton onClick={handleEndCall} style={{ color: "red" }}>
+                                    <CallEndIcon  />
+                                </IconButton>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
+                
             }
 
+            
         </div>
     )
 }
